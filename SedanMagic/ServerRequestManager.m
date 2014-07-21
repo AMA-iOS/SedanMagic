@@ -43,6 +43,37 @@
 
 
 
+static NSString * AFBase64EncodedStringFromString(NSString *string) {
+    NSData *data = [NSData dataWithBytes:[string UTF8String] length:[string lengthOfBytesUsingEncoding:NSUTF8StringEncoding]];
+    NSUInteger length = [data length];
+    NSMutableData *mutableData = [NSMutableData dataWithLength:((length + 2) / 3) * 4];
+    
+    uint8_t *input = (uint8_t *)[data bytes];
+    uint8_t *output = (uint8_t *)[mutableData mutableBytes];
+    
+    for (NSUInteger i = 0; i < length; i += 3) {
+        NSUInteger value = 0;
+        for (NSUInteger j = i; j < (i + 3); j++) {
+            value <<= 8;
+            if (j < length) {
+                value |= (0xFF & input[j]);
+            }
+        }
+        
+        static uint8_t const kAFBase64EncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+        
+        NSUInteger idx = (i / 3) * 4;
+        output[idx + 0] = kAFBase64EncodingTable[(value >> 18) & 0x3F];
+        output[idx + 1] = kAFBase64EncodingTable[(value >> 12) & 0x3F];
+        output[idx + 2] = (i + 1) < length ? kAFBase64EncodingTable[(value >> 6)  & 0x3F] : '=';
+        output[idx + 3] = (i + 2) < length ? kAFBase64EncodingTable[(value >> 0)  & 0x3F] : '=';
+    }
+    
+    return [[NSString alloc] initWithData:mutableData encoding:NSASCIIStringEncoding];
+}
+
+
+
 @implementation ServerRequestManager
 
 @synthesize baseURL = m_baseURL;
@@ -73,16 +104,38 @@
         [statusCodesSet addIndex:OPERATION_STATUS_CODE_USER_NOT_FOUND];
         
         [AFHTTPRequestOperation addAcceptableStatusCodes:statusCodesSet];
+        
+        self.defaultHeaders = [[NSMutableDictionary alloc] initWithCapacity:5];
     }
     return self;
 }
 
 
+// set base url
 - (void)setBaseURL:(NSString *)baseURL
 {
     if(NO == [m_baseURL isEqualToString:baseURL])
     {
         m_baseURL = baseURL;
+    }
+}
+
+
+
+// add auth header
+- (void)setAuthorizationHeaderWithUsername:(NSString *)username password:(NSString *)password {
+	NSString *basicAuthCredentials = [NSString stringWithFormat:@"%@:%@", username, password];
+    
+    [self addDefaultHeader:@"Authorization" value:[NSString stringWithFormat:@"Basic %@", AFBase64EncodedStringFromString(basicAuthCredentials)]];
+}
+
+
+
+-(void) addDefaultHeader:(NSString *)headerFieldName value: (NSString *) value
+{
+    // check and add
+    if (headerFieldName && value) {
+        [self.defaultHeaders setObject:value forKey:headerFieldName];
     }
 }
 
@@ -102,11 +155,14 @@
     
     // set request method
     [request setHTTPMethod:method];
+
+    // set default headers
+    [request setAllHTTPHeaderFields:self.defaultHeaders];
     
     
-    //[request setAllHTTPHeaderFields:self.defaultHeaders];
-    [request setValue:@"Basic YWxleGV5bUBpa3Jvay5uZXQ6cXdhbnRpa28=" forHTTPHeaderField:@"Authorization"];
-    [request setValue:@"A69A850F-08F3-4984-A50F-3FC374C37877" forHTTPHeaderField:@"Api-Key"];
+    
+//    [request setValue:@"Basic YWxleGV5bUBpa3Jvay5uZXQ6cXdhbnRpa28=" forHTTPHeaderField:@"Authorization"];
+//    [request setValue:@"A69A850F-08F3-4984-A50F-3FC374C37877" forHTTPHeaderField:@"Api-Key"];
     
     
     // set params
@@ -237,6 +293,11 @@
                                   
                                   options:kNilOptions 
                                   error:&error];
+            
+            if(nil == error && success)
+            {
+                success(json);
+            }
             
         }
         else

@@ -25,11 +25,20 @@ typedef void (^RequestFailureCallback)(NSError *error, NSDictionary* response);
 // singleton instance
 + (ServerRequestManager*)sharedInstance;
 
+
+//  set auth default header
+- (void)setAuthorizationHeaderWithUsername:(NSString *)username password:(NSString *)password;
+
+-(void) addDefaultHeader:(NSString *)headerFieldName value: (NSString *) value;
+
+
 // request to server
 -(void) request: (NSString*)path
          method:(NSString*)method
          params:(NSDictionary*)params
         success:(RequestSuccessCallback)success
         failure:(RequestFailureCallback)failure;
+
+
 
 @end

@@ -106,7 +106,7 @@
     
     // create server request manager
     ServerRequestManager *requestManager = [ServerRequestManager sharedInstance];
-    [requestManager setBaseURL:@"https://dev-clientapi.sedanmagic.com/"];
+    //[requestManager setBaseURL:@"https://dev-clientapi.sedanmagic.com/"];
     
     // path
     static NSString* const path = @"registration/1/1/0/am/WebEmulator";

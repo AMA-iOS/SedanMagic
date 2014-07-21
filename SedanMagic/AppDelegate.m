@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ServerRequestManager.h"
 
 @implementation AppDelegate
 
@@ -17,6 +18,14 @@
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
      (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     
+    // create server request manager
+    ServerRequestManager *requestManager = [ServerRequestManager sharedInstance];
+    
+    // init with base url
+    [requestManager setBaseURL:@"https://dev-clientapi.sedanmagic.com/"];
+    
+    // add api-key as default headers
+    [requestManager addDefaultHeader:@"Api-Key" value:@"A69A850F-08F3-4984-A50F-3FC374C37877"];    
     
     return YES;
 }

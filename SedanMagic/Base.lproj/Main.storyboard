@@ -73,7 +73,7 @@
         <!--Booking View Controller-->
         <scene sceneID="L9X-GJ-jH9">
             <objects>
-                <viewController id="RR2-KB-IKR" userLabel="Booking View Controller" customClass="BookingViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BookingViewController" id="RR2-KB-IKR" userLabel="Booking View Controller" customClass="BookingViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bIR-nM-whT"/>
                         <viewControllerLayoutGuide type="bottom" id="A01-pV-gq9"/>
@@ -361,6 +361,9 @@
                                         <state key="normal" image="ama-login-large-bt.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="showLoginBtnHandler:" destination="058-YI-sK3" eventType="touchUpInside" id="fBp-22-KU8"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G4I-KA-NR9">
                                         <rect key="frame" x="51" y="180" width="70" height="70"/>
@@ -1238,49 +1241,19 @@
                                 <rect key="frame" x="0.0" y="464" width="320" height="84"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ama-bottom-menu-shadow.png" translatesAutoresizingMaskIntoConstraints="NO" id="etN-06-m73">
-                                        <rect key="frame" x="20" y="9" width="65" height="65"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ama-bottom-menu-shadow.png" translatesAutoresizingMaskIntoConstraints="NO" id="K6q-wI-JCT">
-                                        <rect key="frame" x="93" y="9" width="65" height="65"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ama-bottom-menu-shadow.png" translatesAutoresizingMaskIntoConstraints="NO" id="Pin-Ui-MIY">
-                                        <rect key="frame" x="166" y="9" width="65" height="65"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ama-bottom-menu-shadow.png" translatesAutoresizingMaskIntoConstraints="NO" id="10b-rh-fSN">
-                                        <rect key="frame" x="239" y="9" width="65" height="65"/>
+                                        <rect key="frame" x="128" y="9" width="65" height="65"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XuK-nJ-ygP">
-                                        <rect key="frame" x="32" y="24" width="40" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="ama-bottom-menu-arrow-left.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BRv-f1-mRM">
-                                        <rect key="frame" x="105" y="24" width="40" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="ama-bottom-menu-favorites-hover.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gjb-M3-CFi">
-                                        <rect key="frame" x="178" y="24" width="40" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="ama-bottom-menu-res-list-hover.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vGK-Af-nfl">
-                                        <rect key="frame" x="251" y="24" width="40" height="40"/>
+                                        <rect key="frame" x="140" y="24" width="40" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="ama-bottom-menu-arrow-right.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="loginBtnHandler:" destination="d7x-dZ-QeY" eventType="touchUpInside" id="qjm-If-ILm"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1313,7 +1286,7 @@
                                         <rect key="frame" x="0.0" y="134" width="280" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="d7x-dZ-QeY" id="0r0-Rk-xGy"/>
                                         </connections>

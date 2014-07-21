@@ -7,12 +7,19 @@
 //
 
 #import "LoginViewController.h"
+#import "ServerRequestManager.h"
+
+
+#define ALERT_SUCCESS (100)
+#define ALERT_FAILURE (101)
 
 @interface LoginViewController ()
 
 @end
 
 @implementation LoginViewController
+
+@synthesize emailField, passwordField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,12 +34,186 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    // set background for textfields
+    [self.emailField setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
+    [self.passwordField setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
+    
+    // set offset for textfields
+    self.emailField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 15, 10)];
+    self.passwordField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 15, 10)];
+    
+    // set left view mode
+    self.emailField.leftViewMode =
+    self.passwordField.leftViewMode = UITextFieldViewModeAlways;
 }
+
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (BOOL)emailRegEx:(NSString *)string {
+	
+	// lowercase the email for proper validation
+	string = [string lowercaseString];
+	
+	// regex for email validation
+	NSString *emailRegEx =
+    @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
+    @"~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
+    @"x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-"
+    @"z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5"
+    @"]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-"
+    @"9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21"
+    @"-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+	
+	NSPredicate *regExPredicate =
+    [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
+	BOOL myStringMatchesRegEx = [regExPredicate evaluateWithObject:string];
+	
+	return myStringMatchesRegEx;
+	
+}
+
+
+-(void)validateEmail {
+    if (![self emailRegEx:self.emailField.text]) {
+        [self.emailField becomeFirstResponder];
+        self.emailField.layer.borderWidth = 1.0;
+        self.emailField.layer.borderColor = [UIColor redColor].CGColor;
+    }
+    else {
+        self.emailField.layer.borderWidth = 0.0;
+    }
+}
+
+
+-(BOOL)passwordValidation
+{
+    NSString *password = self.passwordField.text;
+    
+    if ([password length] < 6 ||
+        [password length] > 16)
+    {
+        [self.passwordField becomeFirstResponder];
+        self.passwordField.layer.borderWidth = 1.0;
+        self.passwordField.layer.borderColor = [UIColor redColor].CGColor;
+        
+        return NO;
+    }
+    
+    NSRange rang;
+    rang = [password rangeOfCharacterFromSet:[NSCharacterSet alphanumericCharacterSet]];
+    if (!rang.length) {
+        return NO;
+    }
+    
+    // set border to normal state
+    self.passwordField.layer.borderWidth = 0.0;
+    
+    return YES;
+}
+
+
+
+-(IBAction)loginBtnHandler:(id)sender
+{
+    // get info
+    NSString *email = self.emailField.text;
+    NSString *password = self.passwordField.text;
+    
+    
+    // send request
+    
+    // path
+    static NSString* const path = @"registration/1/1/0/am/WebEmulator";
+    
+    ServerRequestManager *requestManager = [ServerRequestManager sharedInstance];\
+    
+    // get basic auth
+    
+    
+    // add as default header
+    [requestManager setAuthorizationHeaderWithUsername:email password:password];
+    
+    [requestManager request:path method:@"GET" params:nil success:^(NSDictionary* response)
+     {
+         NSMutableDictionary *dict = [[NSDictionary dictionaryWithDictionary:response] mutableCopy];
+         [dict removeObjectForKey:@"password"];
+         
+         // parse response
+         NSString *key = [dict objectForKey:@"email_address"];
+         
+         // save required
+         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+         [defaults setObject:dict forKey:key];
+         [defaults synchronize];
+         
+         // show message
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Logged in" message:@"Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+         alert.tag = ALERT_SUCCESS;
+         [alert show];
+         
+     } failure:^(NSError *error, NSDictionary* response)
+     {
+         NSLog(@"LOGIN FAIL");
+     }];
+}
+
+
+
+#pragma mark --
+#pragma mark TextField delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+    if (textField == self.emailField)
+    {
+        [self validateEmail];
+    }
+    else if (textField == self.passwordField)
+    {
+        [self passwordValidation];
+    }
+    
+    return TRUE;
+}
+
+
+#pragma mark --
+#pragma mark AlertView delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // switch by alert tag
+    switch (alertView.tag)
+    {
+        case ALERT_SUCCESS:
+        {
+            // push view controller without animatiuon
+            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+            
+            UIViewController *bookingViewController = [mainStoryboard                                                                                  instantiateViewControllerWithIdentifier: @"BookingViewController"];
+            
+            
+            [self.navigationController pushViewController:bookingViewController animated:FALSE];
+        }
+            break;
+            
+        case ALERT_FAILURE:
+        {
+            NSLog(@"FAIL");
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 /*
