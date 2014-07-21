@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[RegistrationViewController viewDidLoad]:RegistrationViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__81-[ServerRequestController request:method:params:success:failure:bufferOperation:]_block_invoke70:ServerRequestController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ServerRequestController request:method:params:success:failure:bufferOperation:]:ServerRequestController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.jsonHttpClient">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ServerRequestController createAFNetworkingClients]:ServerRequestController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__81-[ServerRequestController request:method:params:success:failure:bufferOperation:]_block_invoke64:ServerRequestController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__81-[ServerRequestController request:method:params:success:failure:bufferOperation:]_block_invoke68:ServerRequestController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "JSON">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
