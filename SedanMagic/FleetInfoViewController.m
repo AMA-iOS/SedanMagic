@@ -17,13 +17,6 @@
 
 @synthesize providerCodeField, accountIDField, vipNumberField;
 
-//@synthesize topView;
-//@synthesize headerView;
-//@synthesize bottomView;
-//@synthesize footerView;
-//@synthesize activeView;
-
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -58,102 +51,39 @@
     self.providerCodeField.leftViewMode =
     self.accountIDField.leftViewMode =
     self.vipNumberField.leftViewMode = UITextFieldViewModeAlways;
-    
-    
-//    // animations
-//    self.activeView.alpha = 0;
-//    
-//    self.topView.frame = CGRectMake(self.topView.frame.origin.x, self.topView.frame.origin.y - 100,
-//    self.topView.frame.size.width, self.topView.frame.size.height);
-//    
-//    self.headerView.frame = CGRectMake(self.headerView.frame.origin.x, self.headerView.frame.origin.y - 300,
-//    self.headerView.frame.size.width, self.headerView.frame.size.height);
-//    
-//    self.bottomView.frame = CGRectMake(self.bottomView.frame.origin.x, self.bottomView.frame.origin.y + 200,
-//    self.bottomView.frame.size.width, self.bottomView.frame.size.height);
-//    
-//    self.footerView.frame = CGRectMake(self.footerView.frame.origin.x, self.footerView.frame.origin.y + 300,
-//    self.footerView.frame.size.width, self.footerView.frame.size.height);
-//    
-//    
-//    [UIView animateWithDuration:0.5
-//                          delay:0.5
-//                        options: UIViewAnimationOptionCurveEaseInOut
-//                     animations:^{
-//    
-//        // top
-//        self.topView.frame = CGRectMake(self.topView.frame.origin.x, self.topView.frame.origin.y + 100,
-//                                        self.topView.frame.size.width, self.topView.frame.size.height);
-//        // header
-//        self.headerView.frame = CGRectMake(self.headerView.frame.origin.x, self.headerView.frame.origin.y + 300,
-//                                           self.headerView.frame.size.width, self.headerView.frame.size.height);
-//    
-//    
-//        self.bottomView.frame = CGRectMake(self.bottomView.frame.origin.x, self.bottomView.frame.origin.y - 200,
-//                                           self.bottomView.frame.size.width, self.bottomView.frame.size.height);
-//    
-//        self.footerView.frame = CGRectMake(self.footerView.frame.origin.x, self.footerView.frame.origin.y - 300,
-//                                           self.footerView.frame.size.width, self.footerView.frame.size.height);
-//       }
-//       completion:^(BOOL finished){
-//    
-//               // show active area
-//               [UIView animateWithDuration:0.5
-//                                       delay:1.0
-//                                       options: UIViewAnimationOptionCurveEaseInOut
-//                                   animations:^{
-//                                           // show active view
-//                                              self.activeView.alpha = 1;
-//                                          }
-//                                          completion:^(BOOL finished){
-//                                              NSLog(@"Done!");
-//                                          }];
-//                     }];
 }
 
 
 
 
-
-
-//-(IBAction)backBtnHandler:(id)sender
-//{
-//    // animation
-//    [UIView animateWithDuration:0.5
-//                          delay:0.5
-//                        options: UIViewAnimationOptionCurveEaseInOut
-//                     animations:^{
-//                         
-//                         // hide active view
-//                         self.activeView.alpha = 0;
-//                     }
-//                     completion:^(BOOL finished){
-//                         
-//                         // show active area
-//                         [UIView animateWithDuration:0.5
-//                                               delay:1.0
-//                                             options: UIViewAnimationOptionCurveEaseInOut
-//                                          animations:^{
-//                                              // top
-//                                              self.topView.frame = CGRectMake(self.topView.frame.origin.x, self.topView.frame.origin.y - 100,
-//                                                                              self.topView.frame.size.width, self.topView.frame.size.height);
-//                                              // header
-//                                              self.headerView.frame = CGRectMake(self.headerView.frame.origin.x, self.headerView.frame.origin.y - 300,
-//                                                                                 self.headerView.frame.size.width, self.headerView.frame.size.height);
-//                                              
-//                                              
-//                                              self.bottomView.frame = CGRectMake(self.bottomView.frame.origin.x, self.bottomView.frame.origin.y + 200,
-//                                                                                 self.bottomView.frame.size.width, self.bottomView.frame.size.height);
-//                                              
-//                                              self.footerView.frame = CGRectMake(self.footerView.frame.origin.x, self.footerView.frame.origin.y + 300,
-//                                                                                 self.footerView.frame.size.width, self.footerView.frame.size.height);
-//                                          }
-//                                          completion:^(BOOL finished){
-//                                              NSLog(@"Done!");
-//                                              [self.navigationController popViewControllerAnimated:FALSE];
-//                                          }];
-//                     }];
-//}
+// next button touched
+-(IBAction)nextBtnHandler:(id)sender
+{
+    // get strings
+    NSString *providerCode = self.providerCodeField.text;
+    NSString *accountID = self.accountIDField.text;
+    NSString *vipNumber = self.vipNumberField.text;
+    
+    // validate
+    if (providerCode && accountID && vipNumber)
+    {
+        // save to registration
+        self.regisrationController.providerCode = providerCode;
+        self.regisrationController.accountID = accountID;
+        self.regisrationController.vipNumber = vipNumber;
+        self.regisrationController.fleetInfo = TRUE;
+        
+        // call registration controller
+        [self registerNext];
+    }
+    else
+    {
+        // show alert
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Please check data fields"
+                                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
 
 
 

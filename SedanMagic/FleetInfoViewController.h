@@ -17,13 +17,6 @@
  @property (nonatomic, strong) IBOutlet UITextField *providerCodeField;
  @property (nonatomic, strong) IBOutlet UITextField *accountIDField;
  @property (nonatomic, strong) IBOutlet UITextField *vipNumberField;
- 
-// // animation views
-// @property (nonatomic, strong) IBOutlet UIView *topView;
-// @property (nonatomic, strong) IBOutlet UIView *headerView;
-// @property (nonatomic, strong) IBOutlet UIView *bottomView;
-// @property (nonatomic, strong) IBOutlet UIView *footerView;
-// @property (nonatomic, strong) IBOutlet UIView *activeView;
 
 
 @end

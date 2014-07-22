@@ -37,6 +37,22 @@
 @synthesize middleView;
 
 
+
+// registration info
+@synthesize providerCode;
+@synthesize accountID;
+@synthesize vipNumber;
+@synthesize firstName;
+@synthesize lastName;
+@synthesize mobileNumber;
+@synthesize email;
+@synthesize password;
+
+@synthesize fleetInfo, myInfo, security;
+
+@synthesize denyAnimation;
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -51,6 +67,12 @@
 
 -(void) viewWillAppear:(BOOL)animated
 {
+    if (self.denyAnimation)
+    {
+        self.denyAnimation = FALSE;
+        return;
+    }
+    
     // animations
     self.middleView.alpha = 0;
     
@@ -104,39 +126,7 @@
     self.view.backgroundColor = [UIColor colorWithPatternImage:bg];
 
     
-    // create server request manager
-    ServerRequestManager *requestManager = [ServerRequestManager sharedInstance];
-    //[requestManager setBaseURL:@"https://dev-clientapi.sedanmagic.com/"];
-    
-    // path
-    static NSString* const path = @"registration/1/1/0/am/WebEmulator";
-    
-    // params
-    NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            [NSNumber numberWithInt:1], @"provider_id",
-                            @"1", @"provider_account_id",
-                            @"0", @"provider_subaccount_id",
-                            @"am", @"profile_id",
-                            @"alexeym@ikrok.net", @"username",
-                            @"qwantiko", @"password",
-                            @"alexeym@ikrok.net", @"email_address",
-                            @"Alexey", @"first_name",
-                            @"Makarov", @"last_name",
-                            @"WebEmulator", @"device_token",
-                            @"222-222-7777", @"phone_number",
-                            @"Emulator", @"platform_name",
-                            @"0.2", @"platform_version",
-                            nil];
-    
-    [requestManager request:path method:@"POST" params:params success:^(NSDictionary* response)
-     {
-         NSDictionary* resultDict = [response objectForKey:@"Response"];
-         NSLog(@"resultDict = %@", resultDict);
-         
-     } failure:^(NSError *error, NSDictionary* response)
-     {
-         NSLog(@"failure");
-     }];
+   
 
     
     
@@ -303,6 +293,55 @@
 
 
 
+// register to server
+-(void) registerRequest
+{
+    // check if all information populated
+    if (myInfo && fleetInfo && security)
+    {
+        // get server request manager instance
+        ServerRequestManager *requestManager = [ServerRequestManager sharedInstance];
+        
+        // path
+        static NSString* const path = @"registration/1/1/0/am/WebEmulator";
+        
+        // params
+        NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:
+                                self.providerCode, @"provider_id",
+                                self.accountID, @"provider_account_id",
+                                @"0", @"provider_subaccount_id",
+                                self.vipNumber, @"profile_id",
+                                self.email, @"username",
+                                self.password, @"password",
+                                self.email, @"email_address",
+                                self.firstName, @"first_name",
+                                self.lastName, @"last_name",
+                                @"WebEmulator", @"device_token",
+                                self.mobileNumber, @"phone_number",
+                                @"Emulator", @"platform_name",
+                                @"0.2", @"platform_version",
+                                nil];
+        
+        [requestManager request:path method:@"POST" params:params success:^(NSDictionary* response)
+         {
+             NSDictionary* resultDict = [response objectForKey:@"Response"];
+             NSLog(@"resultDict = %@", resultDict);
+             
+         } failure:^(NSError *error, NSDictionary* response)
+         {
+             NSLog(@"failure");
+         }];
+    }
+    else
+    {
+        // error
+    }
+}
+
+
+
+
+
 -(IBAction)fleetInfoBtnHandler:(id)sender
 {
     // show required animation
@@ -337,7 +376,7 @@
                                               
                                               FleetInfoViewController *fleetViewController = (FleetInfoViewController*)[mainStoryboard
                                                                                                                         instantiateViewControllerWithIdentifier: @"FleetInfoViewController"];
-                                              
+                                              fleetViewController.regisrationController = self;
                                               
                                               [self.navigationController pushViewController:fleetViewController animated:FALSE];
                                           }];
@@ -380,6 +419,7 @@
                                               
                                               MyInfoViewController *myInfoViewController = (MyInfoViewController*)[mainStoryboard
                                                                                                                         instantiateViewControllerWithIdentifier: @"MyInfoViewController"];
+                                              myInfoViewController.regisrationController = self;
                                               
                                               
                                               [self.navigationController pushViewController:myInfoViewController animated:FALSE];
@@ -419,17 +459,20 @@
                                               
                                           }
                                           completion:^(BOOL finished){
-                                              // push fleet info screen
+                                              // push security info screen
                                               UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
                                               
                                               SecurityOptionsViewController *securityViewController = (SecurityOptionsViewController*)[mainStoryboard
                                                                                                                    instantiateViewControllerWithIdentifier: @"SecurityOptionsViewController"];
+                                              
+                                              securityViewController.regisrationController = self;
                                               
                                               
                                               [self.navigationController pushViewController:securityViewController animated:FALSE];
                                           }];
                      }];
 }
+
 
 
 

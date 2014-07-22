@@ -160,11 +160,6 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
     [request setAllHTTPHeaderFields:self.defaultHeaders];
     
     
-    
-//    [request setValue:@"Basic YWxleGV5bUBpa3Jvay5uZXQ6cXdhbnRpa28=" forHTTPHeaderField:@"Authorization"];
-//    [request setValue:@"A69A850F-08F3-4984-A50F-3FC374C37877" forHTTPHeaderField:@"Api-Key"];
-    
-    
     // set params
     if (params)
     {

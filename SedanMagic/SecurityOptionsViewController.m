@@ -57,6 +57,45 @@
 
 
 
+// next button touched
+-(IBAction)nextBtnHandler:(id)sender
+{
+    // get strings
+    NSString *email = self.emailField.text;
+    NSString *password = self.passwordField.text;
+    
+    // check if password is equal to confirm pass field
+    if (![self.passwordField.text isEqualToString:self.confPasswordField.text])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Please check CONFIRM PASSWORD field" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
+    
+    // validate
+    if (email && password)
+    {
+        // save to registration
+        self.regisrationController.email = email;
+        self.regisrationController.password = password;
+        self.regisrationController.security = TRUE;
+        
+        // call registration controller
+        [self registerNext];
+        
+    }
+    else
+    {
+        // show alert
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Please check data fields"
+                                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
+
+
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

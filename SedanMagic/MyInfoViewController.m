@@ -55,6 +55,36 @@
 
 
 
+// next button touched
+-(IBAction)nextBtnHandler:(id)sender
+{
+    // get strings
+    NSString *firstName = self.firstNameField.text;
+    NSString *lastName = self.lastNameField.text;
+    NSString *mobileNumber = self.mobileNumberField.text;
+    
+    // validate
+    if (firstName && lastName && mobileNumber)
+    {
+        // save to registration
+        self.regisrationController.firstName = firstName;
+        self.regisrationController.lastName = lastName;
+        self.regisrationController.mobileNumber = mobileNumber;
+        self.regisrationController.myInfo = TRUE;
+        
+        // call registration controller
+        [self registerNext];
+        
+    }
+    else
+    {
+        // show alert
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Please check data fields"
+                                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
+
 
 - (void)didReceiveMemoryWarning
 {
