@@ -10,7 +10,7 @@
 
 #import "BaseViewController.h"
 
-@interface FleetInfoViewController : BaseViewController <UITextFieldDelegate>
+@interface FleetInfoViewController : BaseViewController
 
 
  // text fields

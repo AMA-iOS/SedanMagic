@@ -106,8 +106,8 @@
 	if (self.regisrationController.email != nil) {
 	self.emailField.text = self.regisrationController.email;
 	}
-	if (self.regisrationController.password != nil) {
-	self.confPasswordField.text = self.regisrationController.password;
+	if (self.regisrationController.confPassword != nil) {
+	self.confPasswordField.text = self.regisrationController.confPassword;
 	}
 }
 
@@ -117,13 +117,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    
-    return TRUE;
-}
 
 
 /*

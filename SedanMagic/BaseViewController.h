@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RegistrationViewController.h"
 
-@interface BaseViewController : UIViewController
+@interface BaseViewController : UIViewController <UITextFieldDelegate>
 
 @property (nonatomic, strong) RegistrationViewController *regisrationController;
 

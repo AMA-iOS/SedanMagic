@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface MyInfoViewController : BaseViewController <UITextFieldDelegate>
+@interface MyInfoViewController : BaseViewController
 
 
 // text fields

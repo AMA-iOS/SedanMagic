@@ -62,13 +62,13 @@
 
 - (void) fillDataFields
 {
-	if (self.regisrationController.password != nil) {
+	if (self.regisrationController.providerCode != nil) {
 		self.providerCodeField.text = self.regisrationController.providerCode;
 	}
-	if (self.regisrationController.email != nil) {
+	if (self.regisrationController.accountID != nil) {
 		self.accountIDField.text = self.regisrationController.accountID;
 	}
-	if (self.regisrationController.password != nil) {
+	if (self.regisrationController.vipNumber != nil) {
 		self.vipNumberField.text = self.regisrationController.vipNumber;
 	}
 }
@@ -110,13 +110,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    
-    return TRUE;
-}
 
 
 

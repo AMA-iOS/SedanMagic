@@ -53,20 +53,28 @@
     self.mobileNumberField.leftViewMode = UITextFieldViewModeAlways;
 }
 
+
 -(void) viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
 	[self fillDataFields];
 }
+
+
 - (void) fillDataFields
 {
-	if (self.regisrationController.password != nil) {
+	if (self.regisrationController.firstName != nil)
+    {
 		self.firstNameField.text = self.regisrationController.firstName;
 	}
-	if (self.regisrationController.email != nil) {
+    
+	if (self.regisrationController.lastName != nil)
+    {
 		self.lastNameField.text = self.regisrationController.lastName;
 	}
-	if (self.regisrationController.password != nil) {
+    
+	if (self.regisrationController.mobileNumber != nil)
+    {
 		self.mobileNumberField.text = self.regisrationController.mobileNumber;
 	}
 }
@@ -107,14 +115,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    
-    return TRUE;
 }
 
 

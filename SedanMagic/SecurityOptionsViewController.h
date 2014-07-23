@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface SecurityOptionsViewController : BaseViewController <UITextFieldDelegate>
+@interface SecurityOptionsViewController : BaseViewController
 
 // text fields
 @property (nonatomic, strong) IBOutlet UITextField *emailField;

@@ -13,6 +13,9 @@
 
 
 @interface BaseViewController ()
+{
+    BOOL activeViewShifted;
+}
 
 @end
 
@@ -248,6 +251,71 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+    // change self.activeView frame
+    activeViewShifted = FALSE;
+    
+    // show active area
+    [UIView animateWithDuration:0.5
+                          delay:0.0
+                        options: UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         // top
+                         self.activeView.frame = CGRectMake(self.activeView.frame.origin.x, self.activeView.frame.origin.y + 100,
+                                                            self.activeView.frame.size.width, self.activeView.frame.size.height);
+                         
+                         self.headerView.frame = CGRectMake(self.headerView.frame.origin.x, self.headerView.frame.origin.y + 100,
+                                                            self.headerView.frame.size.width, self.headerView.frame.size.height);
+                     }
+                     completion:^(BOOL finished){
+                     }];
+    
+    return TRUE;
+}
+
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (activeViewShifted)
+    {
+        return TRUE;
+    }
+    
+    // change self.activeView frame
+    activeViewShifted = TRUE;
+    
+    // show active area
+    [UIView animateWithDuration:0.5
+                          delay:0.0
+                        options: UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         // top
+                         self.activeView.frame = CGRectMake(self.activeView.frame.origin.x, self.activeView.frame.origin.y - 100,
+                                                         self.activeView.frame.size.width, self.activeView.frame.size.height);
+                         
+                         self.headerView.frame = CGRectMake(self.headerView.frame.origin.x, self.headerView.frame.origin.y - 100,
+                                                         self.headerView.frame.size.width, self.headerView.frame.size.height);
+                     }
+                     completion:^(BOOL finished){
+                     }];
+    
+    return TRUE;
+}
+
+
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    return TRUE;
+}
+
+
 
 /*
 #pragma mark - Navigation

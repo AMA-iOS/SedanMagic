@@ -47,6 +47,7 @@
 @synthesize mobileNumber;
 @synthesize email;
 @synthesize password;
+@synthesize confPassword;
 
 @synthesize fleetInfo, myInfo, security;
 

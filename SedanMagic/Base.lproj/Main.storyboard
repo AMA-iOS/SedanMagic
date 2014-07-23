@@ -500,6 +500,9 @@
                                         <state key="normal" image="ama-bottom-menu-arrow-left.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="backBtnHandler:" destination="kAN-G3-Xjp" eventType="touchUpInside" id="mOf-Wa-Ntp"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZK-96-xVs">
                                         <rect key="frame" x="251" y="24" width="40" height="40"/>
@@ -858,6 +861,9 @@
                                         <state key="normal" image="ama-bottom-menu-arrow-left.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="backBtnHandler:" destination="e2M-7y-2nD" eventType="touchUpInside" id="LTj-Pw-esz"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gfd-pD-lRs">
                                         <rect key="frame" x="251" y="24" width="40" height="40"/>
@@ -1048,6 +1054,9 @@
                                         <state key="normal" image="ama-bottom-menu-arrow-left.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="backBtnHandler:" destination="j7k-Tx-w4y" eventType="touchUpInside" id="GP8-SV-UR0"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gll-OM-cfR">
                                         <rect key="frame" x="251" y="24" width="40" height="40"/>
