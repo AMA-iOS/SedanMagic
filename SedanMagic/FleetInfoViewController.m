@@ -54,7 +54,24 @@
 }
 
 
+-(void) viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	[self fillDataFields];
+}
 
+- (void) fillDataFields
+{
+	if (self.regisrationController.password != nil) {
+		self.providerCodeField.text = self.regisrationController.providerCode;
+	}
+	if (self.regisrationController.email != nil) {
+		self.accountIDField.text = self.regisrationController.accountID;
+	}
+	if (self.regisrationController.password != nil) {
+		self.vipNumberField.text = self.regisrationController.vipNumber;
+	}
+}
 
 // next button touched
 -(IBAction)nextBtnHandler:(id)sender

@@ -55,7 +55,11 @@
 
 
 
-
+- (void) viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	[self fillDataFields];
+}
 
 // next button touched
 -(IBAction)nextBtnHandler:(id)sender
@@ -94,7 +98,18 @@
 }
 
 
-
+- (void) fillDataFields
+{
+	if (self.regisrationController.password != nil) {
+		self.passwordField.text = self.regisrationController.password;
+	}
+	if (self.regisrationController.email != nil) {
+	self.emailField.text = self.regisrationController.email;
+	}
+	if (self.regisrationController.password != nil) {
+	self.confPasswordField.text = self.regisrationController.password;
+	}
+}
 
 - (void)didReceiveMemoryWarning
 {

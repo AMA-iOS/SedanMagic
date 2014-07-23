@@ -53,6 +53,23 @@
     self.mobileNumberField.leftViewMode = UITextFieldViewModeAlways;
 }
 
+-(void) viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	[self fillDataFields];
+}
+- (void) fillDataFields
+{
+	if (self.regisrationController.password != nil) {
+		self.firstNameField.text = self.regisrationController.firstName;
+	}
+	if (self.regisrationController.email != nil) {
+		self.lastNameField.text = self.regisrationController.lastName;
+	}
+	if (self.regisrationController.password != nil) {
+		self.mobileNumberField.text = self.regisrationController.mobileNumber;
+	}
+}
 
 
 // next button touched

@@ -50,7 +50,12 @@
     self.view.backgroundColor = [UIColor colorWithPatternImage:bg];
     
     
-    // animations
+}
+
+
+-(void) viewWillAppear:(BOOL)animated
+{
+	// animations
     self.activeView.alpha = 0;
     
     self.topView.frame = CGRectMake(self.topView.frame.origin.x, self.topView.frame.origin.y - 100,
@@ -99,10 +104,8 @@
                                               NSLog(@"Done!");
                                           }];
                      }];
+
 }
-
-
-
 
 
 -(IBAction)backBtnHandler:(id)sender
@@ -238,7 +241,6 @@
         [self.navigationController pushViewController:securityViewController animated:FALSE];
     }
 }
-
 
 
 - (void)didReceiveMemoryWarning
