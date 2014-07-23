@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		286959BF19800CF300AC64F8 /* ama-checkbox-checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 286959BD19800CF300AC64F8 /* ama-checkbox-checked.png */; };
+		286959C019800CF300AC64F8 /* ama-checkbox-checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 286959BD19800CF300AC64F8 /* ama-checkbox-checked.png */; };
+		286959C119800CF300AC64F8 /* ama-checkbox-unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 286959BE19800CF300AC64F8 /* ama-checkbox-unchecked.png */; };
+		286959C219800CF300AC64F8 /* ama-checkbox-unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 286959BE19800CF300AC64F8 /* ama-checkbox-unchecked.png */; };
 		3C416FC6196EA29D008383FF /* ServerRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C416FC5196EA29D008383FF /* ServerRequestController.m */; };
 		3C416FC7196EA29D008383FF /* ServerRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C416FC5196EA29D008383FF /* ServerRequestController.m */; };
 		3C417054196ED9DF008383FF /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3C417014196ED9DF008383FF /* .gitignore */; };
@@ -323,6 +327,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		286959BD19800CF300AC64F8 /* ama-checkbox-checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ama-checkbox-checked.png"; sourceTree = "<group>"; };
+		286959BE19800CF300AC64F8 /* ama-checkbox-unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ama-checkbox-unchecked.png"; sourceTree = "<group>"; };
 		3C416FC4196EA29D008383FF /* ServerRequestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerRequestController.h; sourceTree = "<group>"; };
 		3C416FC5196EA29D008383FF /* ServerRequestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerRequestController.m; sourceTree = "<group>"; };
 		3C417014196ED9DF008383FF /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -730,6 +736,8 @@
 		3CEDDFB01977CDC8005213CF /* ama-pngs */ = {
 			isa = PBXGroup;
 			children = (
+				286959BD19800CF300AC64F8 /* ama-checkbox-checked.png */,
+				286959BE19800CF300AC64F8 /* ama-checkbox-unchecked.png */,
 				3CC8D8DB197973180015C280 /* ama-splash-bg.png */,
 				3CC8D8DC197973180015C280 /* ama-splash-page-bg.png */,
 				3CC8D8D51979718C0015C280 /* ama-login-large-bt.png */,
@@ -965,6 +973,7 @@
 				3C50887A195D8D260024CBAC /* 12.jpg in Resources */,
 				3CEDE0C21977CDC8005213CF /* ama-small-ic-minus-hover.png in Resources */,
 				3C417068196ED9DF008383FF /* AFNetworking.podspec in Resources */,
+				286959BF19800CF300AC64F8 /* ama-checkbox-checked.png in Resources */,
 				3CC8D8D91979718C0015C280 /* ama-login-registration-bt.png in Resources */,
 				3CEDE0B41977CDC8005213CF /* ama-small-ic-delete.png in Resources */,
 				3CEDE01C1977CDC8005213CF /* ama-address-ic.png in Resources */,
@@ -1058,6 +1067,7 @@
 				3CEDE0901977CDC8005213CF /* ama-page-title-instructions-ic.png in Resources */,
 				3CEDE02C1977CDC8005213CF /* ama-arrow-bt-top.png in Resources */,
 				3CEDE0661977CDC8005213CF /* ama-fleet-info-ic.png in Resources */,
+				286959C119800CF300AC64F8 /* ama-checkbox-unchecked.png in Resources */,
 				3CEDE0881977CDC8005213CF /* ama-page-title-confirmation-ic.png in Resources */,
 				3CEDE03A1977CDC8005213CF /* ama-bottom-menu-favorites-hover.png in Resources */,
 				3CEDE08C1977CDC8005213CF /* ama-page-title-favorites-ic.png in Resources */,
@@ -1117,6 +1127,7 @@
 				3CEDE0A51977CDC8005213CF /* ama-security-ic.png in Resources */,
 				3CEDE0431977CDC8005213CF /* ama-bottom-menu-res-list-hover.png in Resources */,
 				3CEDE0E51977CDC8005213CF /* ama-top-menu-menu-ic.png in Resources */,
+				286959C019800CF300AC64F8 /* ama-checkbox-checked.png in Resources */,
 				3CEDE04B1977CDC8005213CF /* ama-bottom-menu-shadow.png in Resources */,
 				3CC8D8DA1979718C0015C280 /* ama-login-registration-bt.png in Resources */,
 				3CEDE0771977CDC8005213CF /* ama-main-step-3-ic.png in Resources */,
@@ -1189,6 +1200,7 @@
 				3CEDE0C31977CDC8005213CF /* ama-small-ic-minus-hover.png in Resources */,
 				3CEDE0711977CDC8005213CF /* ama-main-bg.png in Resources */,
 				3CEDE0E91977CDC8005213CF /* ama-top-menu-new-res-ic.png in Resources */,
+				286959C219800CF300AC64F8 /* ama-checkbox-unchecked.png in Resources */,
 				3CEDE0951977CDC8005213CF /* ama-page-title-reqirements-ic.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

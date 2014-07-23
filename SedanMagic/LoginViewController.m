@@ -14,6 +14,10 @@
 #define ALERT_FAILURE (101)
 
 @interface LoginViewController ()
+{
+	BOOL isChecked;
+	IBOutlet UIButton *loginCheckBox;
+}
 
 @end
 
@@ -46,6 +50,17 @@
     // set left view mode
     self.emailField.leftViewMode =
     self.passwordField.leftViewMode = UITextFieldViewModeAlways;
+	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSNumber *loginFlagNum = [defaults valueForKey:@"autologin"];
+	
+	isChecked = [loginFlagNum boolValue];
+	
+	if (!isChecked) {
+		[loginCheckBox setImage:[UIImage imageNamed:@"ama-checkbox-unchecked.png"] forState:UIControlStateNormal];
+	}else{
+		[loginCheckBox setImage:[UIImage imageNamed:@"ama-checkbox-checked.png"] forState:UIControlStateNormal];
+	}
 }
 
 
@@ -91,6 +106,19 @@
     }
 }
 
+-(IBAction)autoLoginButtonHandler:(id)sender
+{
+	if (isChecked) {
+		[loginCheckBox setImage:[UIImage imageNamed:@"ama-checkbox-unchecked.png"] forState:UIControlStateNormal];
+	}else{
+		[loginCheckBox setImage:[UIImage imageNamed:@"ama-checkbox-checked.png"] forState:UIControlStateNormal];
+	}
+	isChecked = !isChecked;
+	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSNumber numberWithBool:isChecked] forKey:@"autologin"];
+    [defaults synchronize];
+}
 
 -(BOOL)passwordValidation
 {

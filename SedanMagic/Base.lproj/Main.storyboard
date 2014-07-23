@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="1qB-Fb-iti">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="1qB-Fb-iti">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -1285,6 +1285,16 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sei-Q9-iNL">
+                                        <rect key="frame" x="120" y="178" width="40" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="ama-checkbox-unchecked.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="autoLoginButtonHandler:" destination="d7x-dZ-QeY" eventType="touchUpInside" id="YZD-Qn-ibO"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -1298,6 +1308,7 @@
                         <outlet property="emailField" destination="iM9-xH-ucA" id="DXN-zC-dXO"/>
                         <outlet property="footerView" destination="F7q-wV-5OD" id="MKT-0C-MLC"/>
                         <outlet property="headerView" destination="y2x-BT-fHw" id="ZOl-eH-Ie1"/>
+                        <outlet property="loginCheckBox" destination="sei-Q9-iNL" id="EBC-tn-XVU"/>
                         <outlet property="passwordField" destination="gDM-YL-10h" id="crA-gP-yv6"/>
                         <outlet property="topView" destination="Hir-vw-hD7" id="WX4-fm-iOX"/>
                     </connections>
@@ -1319,6 +1330,7 @@
         <image name="ama-bottom-menu-arrow-left.png" width="82" height="82"/>
         <image name="ama-bottom-menu-arrow-right.png" width="82" height="82"/>
         <image name="ama-bottom-menu-shadow.png" width="129" height="129"/>
+        <image name="ama-checkbox-unchecked.png" width="80" height="80"/>
         <image name="ama-field-bg.png" width="560" height="80"/>
         <image name="ama-fleet-info-ic.png" width="220" height="220"/>
         <image name="ama-large-bt-shadow.png" width="184" height="186"/>
