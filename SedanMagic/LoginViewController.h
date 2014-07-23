@@ -16,4 +16,6 @@
 @property (nonatomic, strong) IBOutlet UITextField *passwordField;
 
 
++ (void) autoLogin;
+
 @end

@@ -34,6 +34,21 @@
     return self;
 }
 
++ (void) autoLogin
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
+	NSString *email = [defaults valueForKey:@"email_address"];
+	if (email) {
+		NSDictionary *dict = [defaults valueForKey:email];
+		NSString *password = [dict objectForKey:@"password"];
+		
+		[LoginViewController doLogin:email pass:password];
+	}
+
+
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -154,8 +169,12 @@
     NSString *email = self.emailField.text;
     NSString *password = self.passwordField.text;
     
-    
-    // send request
+	[LoginViewController doLogin:email pass:password];
+}
+
++(void) doLogin: (NSString *) email pass: (NSString *)password
+{
+	// send request
     
     // path
     static NSString* const path = @"registration/1/1/0/am/WebEmulator";
@@ -170,14 +189,17 @@
     
     [requestManager request:path method:@"GET" params:nil success:^(NSDictionary* response)
      {
+		 
          NSMutableDictionary *dict = [[NSDictionary dictionaryWithDictionary:response] mutableCopy];
          [dict removeObjectForKey:@"password"];
+		 //
          
          // parse response
          NSString *key = [dict objectForKey:@"email_address"];
          
          // save required
          NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+		 [defaults setObject:key forKey:@"email_address"];
          [defaults setObject:dict forKey:key];
          [defaults synchronize];
          
@@ -191,7 +213,6 @@
          NSLog(@"LOGIN FAIL");
      }];
 }
-
 
 
 #pragma mark --
@@ -223,6 +244,12 @@
     {
         case ALERT_SUCCESS:
         {
+			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+			NSMutableDictionary *dict = [[defaults objectForKey:self.emailField.text] mutableCopy];
+			[dict setObject:self.passwordField.text forKey:@"password"];
+			[defaults setObject:dict forKey:self.emailField.text];
+			[defaults synchronize];
+			
             // push view controller without animatiuon
             UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
             
