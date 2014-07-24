@@ -13,6 +13,10 @@
 #import "LoginViewController.h"
 
 
+NSString* const kNotification_AutoLogged=@"AutoLogged";
+
+
+
 @interface SplashScreenViewController ()
 
 @end
@@ -35,6 +39,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoLogged) name:kNotification_AutoLogged object:nil];
+    
     // hide select view
     self.selectView.alpha = 0;
     
@@ -50,8 +56,36 @@
                          self.logoImageView.alpha = 0;
                      }
                      completion:^(BOOL finished){
-                         [self performSelector:@selector(showSelect) withObject:nil afterDelay:0.1];
+                         
+                         // check if autologin required
+                         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                         NSNumber *autologinFlagNum = [defaults valueForKey:@"autologin"];
+                         if ([autologinFlagNum boolValue])
+                         {
+                             // call autologin
+                             [LoginViewController autoLogin];
+                         }
+                         else
+                         {
+                             [self performSelector:@selector(showSelect) withObject:nil afterDelay:0.1];
+                         }
                      }];
+}
+
+
+
+-(void) autoLogged
+{
+    NSLog(@"autoLogged");
+    
+    
+    // show required screen
+    // push view controller without animatiuon
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    
+    UIViewController *bookingViewController = [mainStoryboard                                                                                  instantiateViewControllerWithIdentifier: @"BookingViewController"];
+    
+    [self.navigationController pushViewController:bookingViewController animated:FALSE];
 }
 
 
@@ -66,14 +100,8 @@
                          self.selectView.alpha = 1;
                      }
                      completion:^(BOOL finished){
-                         //[self performSelector:@selector(showSelect) withObject:nil afterDelay:0.3];
+
                      }];
-    
-    /*
-   
-     */
-    
-   //[self performSegueWithIdentifier:@"SplashToSelect" sender:self];
 }
 
 

@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "ServerRequestManager.h"
+#import "SplashScreenViewController.h"
 
 
 #define ALERT_SUCCESS (100)
@@ -20,6 +21,9 @@
 }
 
 @end
+
+
+
 
 @implementation LoginViewController
 
@@ -34,20 +38,42 @@
     return self;
 }
 
+
+
 + (void) autoLogin
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	NSString *email = [defaults valueForKey:@"email_address"];
-	if (email) {
+	if (email)
+    {
 		NSDictionary *dict = [defaults valueForKey:email];
 		NSString *password = [dict objectForKey:@"password"];
 		
-		[LoginViewController doLogin:email pass:password];
+		// path
+        static NSString* const path = @"registration/1/1/0/am/WebEmulator";
+        
+        ServerRequestManager *requestManager = [ServerRequestManager sharedInstance];\
+        
+        // get basic auth
+        
+        
+        // add as default header
+        [requestManager setAuthorizationHeaderWithUsername:email password:password];
+        
+        [requestManager request:path method:@"GET" params:nil success:^(NSDictionary* response)
+         {
+             // send notification
+             [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_AutoLogged object:nil];
+             
+         } failure:^(NSError *error, NSDictionary* response)
+         {
+             NSLog(@"LOGIN FAIL");
+         }];
 	}
-
-
 }
+
+
 
 - (void)viewDidLoad
 {
@@ -68,6 +94,9 @@
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSNumber *loginFlagNum = [defaults valueForKey:@"autologin"];
+    
+    NSString *email = [defaults valueForKey:@"email_address"];
+    self.emailField.text = email;
 	
 	isChecked = [loginFlagNum boolValue];
 	
@@ -169,10 +198,12 @@
     NSString *email = self.emailField.text;
     NSString *password = self.passwordField.text;
     
-	[LoginViewController doLogin:email pass:password];
+	[self doLogin:email pass:password];
 }
 
-+(void) doLogin: (NSString *) email pass: (NSString *)password
+
+
+-(void) doLogin: (NSString *) email pass: (NSString *)password
 {
 	// send request
     
@@ -220,7 +251,9 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [textField resignFirstResponder];
+    [super textFieldShouldReturn:textField];
+    
+    //[textField resignFirstResponder];
     
     if (textField == self.emailField)
     {

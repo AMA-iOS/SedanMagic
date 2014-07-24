@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface LoginViewController : BaseViewController <UITextFieldDelegate, UIAlertViewDelegate>
+@interface LoginViewController : BaseViewController <UIAlertViewDelegate>
 
 
 @property (nonatomic, strong) IBOutlet UITextField *emailField;
@@ -17,5 +17,6 @@
 
 
 + (void) autoLogin;
+
 
 @end

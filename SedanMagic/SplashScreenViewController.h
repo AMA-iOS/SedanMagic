@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+NSString* const kNotification_AutoLogged;
+
 @interface SplashScreenViewController : UIViewController
 
 @property (nonatomic, strong) IBOutlet UIImageView *logoImageView;
