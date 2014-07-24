@@ -125,15 +125,6 @@
     // set background
     UIImage *bg = [UIImage imageNamed:@"ama-main-bg.png"];
     self.view.backgroundColor = [UIColor colorWithPatternImage:bg];
-
-    
-   
-
-    
-    
-    // create request controller and set base url
-    ServerRequestController *requestController = [ServerRequestController sharedInstance];
-    [requestController setBaseURL:@"https://dev-clientapi.sedanmagic.com/"];
    
     /*
     // path

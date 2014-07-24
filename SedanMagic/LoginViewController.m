@@ -69,8 +69,15 @@
          } failure:^(NSError *error, NSDictionary* response)
          {
              NSLog(@"LOGIN FAIL");
+             // send notification
+             [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_AutoLoggedFail object:nil];
          }];
 	}
+    else
+    {
+        // send notification
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_AutoLoggedFail object:nil];
+    }
 }
 
 

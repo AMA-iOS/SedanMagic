@@ -14,6 +14,8 @@
 
 
 NSString* const kNotification_AutoLogged=@"AutoLogged";
+NSString* const kNotification_AutoLoggedFail=@"AutoLoggedFail";
+
 
 
 
@@ -40,6 +42,7 @@ NSString* const kNotification_AutoLogged=@"AutoLogged";
     // Do any additional setup after loading the view.
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoLogged) name:kNotification_AutoLogged object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoLoggedFail) name:kNotification_AutoLoggedFail object:nil];
     
     // hide select view
     self.selectView.alpha = 0;
@@ -67,7 +70,7 @@ NSString* const kNotification_AutoLogged=@"AutoLogged";
                          }
                          else
                          {
-                             [self performSelector:@selector(showSelect) withObject:nil afterDelay:0.1];
+                             [self performSelector:@selector(showSelect) withObject:nil afterDelay:0.0];
                          }
                      }];
 }
@@ -90,6 +93,18 @@ NSString* const kNotification_AutoLogged=@"AutoLogged";
 
 
 
+-(void) autoLoggedFail
+{
+    NSLog(@"autoLogged");
+    
+    [self performSelector:@selector(showSelect) withObject:nil afterDelay:0.0];
+    
+    // show required message
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Autologin error" message:@"Please log in manually"
+                                                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+}
+
+
 // show selection view with buttons
 -(void) showSelect
 {
@@ -103,7 +118,6 @@ NSString* const kNotification_AutoLogged=@"AutoLogged";
 
                      }];
 }
-
 
 
 

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 NSString* const kNotification_AutoLogged;
+NSString* const kNotification_AutoLoggedFail;
 
 @interface SplashScreenViewController : UIViewController
 
